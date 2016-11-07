@@ -1,0 +1,41 @@
+frameworkVersion: "1.1.0"
+
+service: ${file(../config.yml):appPrefix}-items
+
+provider:
+  name: aws
+  runtime: ${file(../config.yml):awsRuntime}
+  stage: ${file(../config.yml):awsStage}
+  region: ${file(../config.yml):awsRegion}
+  profile: ${file(../config.yml):awsProfile}
+
+functions:
+  read:
+    handler: handler.read
+    events:
+      - http:
+          path: items
+          method: get
+          cors: true
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: items
+          method: put
+          cors: true
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: items
+          method: delete
+          cors: true
+
+package:
+  exclude:
+    - node_modules/**
+    - '!node_modules/lib/**'
+
+plugins:
+  - serverless-offline
