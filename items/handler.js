@@ -4,17 +4,12 @@ var lib = require('lib');
 
 var Helpers = {
 
-	respond: (context, err, result) => {
+	respond: (context, err, result, statusCodeOverride) => {
 		var statusCode = 200;
 		var body = result;
 
-		if (!result) {
+		if (result.length === 0) {
 			statusCode = 400;
-			result = [{}];
-		}
-
-		if (result.length == 0) {
-			statusCode = 404;
 		}
 
 		if (err) {
@@ -22,10 +17,18 @@ var Helpers = {
 			body = { err: err };
 		}
 
+		if (statusCodeOverride) {
+			statusCode = statusCodeOverride;
+		}
+
 		var response = {
 			statusCode: statusCode,
 			body: JSON.stringify(body)
 		};
+
+		if (statusCode === 204) {
+			response = { statusCode: response.statusCode };
+		}
 
 		return context.succeed(response);
 	}
@@ -68,6 +71,6 @@ module.exports.delete = (event, context, callback) => {
 
 	lib.items.delete(event, (err, result) => {
 
-		return Helpers.respond(context, err, result);
+		return Helpers.respond(context, err, result, 204);
 	});
 };
