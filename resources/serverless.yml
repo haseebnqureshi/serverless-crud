@@ -15,7 +15,7 @@ resources:
       Type: 'AWS::DynamoDB::Table'
       DeletionPolicy: Retain
       Properties:
-        TableName: '${file(../config.yml):appPrefix}-items'
+        TableName: 'items'
         AttributeDefinitions:
           - AttributeName: id
             AttributeType: S
