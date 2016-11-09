@@ -13,6 +13,6 @@ Serverless framework example for launching a basic CRUD service.
 ## Useful Commands
 To make full application ```deploy``` and ```remove``` simple, I've boiled them down to these two ```npm scripts``` that you can easily run:
 
-- Run ```npm run-script info``` to ```sls info``` every service contained, getting a rundown of your app as a whole
-- Run ```npm run-script deploy``` to ```sls deploy``` every service contained
-- Run ```npm run-script remove``` to ```sls remove``` every service contained
+- Run ```npm run info``` to ```sls info``` every service contained, getting a rundown of your app as a whole
+- Run ```npm run deploy``` to ```sls deploy``` every service contained
+- Run ```npm run remove``` to ```sls remove``` every service contained
