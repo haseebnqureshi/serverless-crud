@@ -1,16 +1,12 @@
 #!/bin/bash
 
-function libLink {
-	cd lib
-	npm link
-	cd ..
-}
-
 function npmLinkServices {
 
-	# npm link our lib for shared use between services
-	echo "npm link our shared lib..."
-	libLink
+	# npm link our 'shared' dir for shared use between services
+	echo "npm link our shared dir..."
+	cd shared
+	npm link
+	cd ..
 
 	# this gets called on npm install on this repo, for easier startup to local dev
 	for service in */
@@ -20,8 +16,8 @@ function npmLinkServices {
 		do
 			if [[ "$serviceFile" == *"serverless.y"* ]]
 			then
-				echo "Found serverless service at $service - linking shared lib..."
-				npm link lib
+				echo "Found serverless service at $service - linking shared dir..."
+				npm link shared
 			fi
 		done	
 		cd ..
