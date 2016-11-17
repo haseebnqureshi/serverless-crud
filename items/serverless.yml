@@ -1,13 +1,13 @@
 frameworkVersion: "1.1.0"
 
-service: ${file(../config.yml):appPrefix}-items
+service: ${file(../shared/config.yml):appPrefix}-items
 
 provider:
   name: aws
-  runtime: ${file(../config.yml):awsRuntime}
-  stage: ${file(../config.yml):awsStage}
-  region: ${file(../config.yml):awsRegion}
-  profile: ${file(../config.yml):awsProfile}
+  runtime: ${file(../shared/config.yml):awsRuntime}
+  stage: ${file(../shared/config.yml):awsStage}
+  region: ${file(../shared/config.yml):awsRegion}
+  profile: ${file(../shared/config.yml):awsProfile}
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -18,7 +18,24 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${file(../config.yml):awsRegion}:*:*"
+      Resource: "arn:aws:dynamodb:${file(../shared/config.yml):awsRegion}:*:*"
+
+resources:
+  Resources:
+    UserDynamoDBTable:
+      Type: AWS::DynamoDB::Table
+      DeletionPolicy: Retain
+      Properties:
+        TableName: ${file(../shared/config.yml):appPrefix}-items
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 functions:
   create:
@@ -56,11 +73,6 @@ functions:
           path: items/{id}
           method: delete
           cors: true
-
-package:
-  exclude:
-    - node_modules/**
-    - '!node_modules/lib/**'
 
 plugins:
   - serverless-offline

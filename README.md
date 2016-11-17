@@ -4,7 +4,7 @@ Serverless framework example for launching a basic CRUD service.
 
 ## Quick Start
 
-1. Go to ```config.yml``` in the repo's root directory. Change whatever you need to change there. These settings are then used by each service below for full consistency.
+1. Go to ```shared/config.yml``` in the repo's root directory. Change whatever you need to change there. These settings are then used by each service below for full consistency. This information also becomes available to each SLS service in your repo directory, by simply ```var Shared = require('shared');``` and accessing the ```Config``` key, from right inside your SLS handler code.
 
 2. For local development, run ```npm install``` in the repo's root directory. This will install any dev dependency (like ```serverless-offline```).
 

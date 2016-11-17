@@ -1,13 +1,14 @@
 {
-  "name": "hq-starter-crud",
-  "version": "1.1.0",
+  "name": "hq-serverless-crud",
+  "version": "1.2.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "install": "bash scripts/install.sh",
     "deploy": "bash scripts/deploy.sh",
-    "remove": "bash scripts/remove.sh",
-    "info": "bash scripts/info.sh"
+    "info": "bash scripts/info.sh",
+    "install": "bash scripts/install.sh",
+    "offline": "bash scripts/offline.sh",
+    "remove": "bash scripts/remove.sh"
   },
   "repository": {
     "type": "git",

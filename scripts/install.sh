@@ -44,8 +44,8 @@ function npmInstallServices {
 # npm install our services
 npmInstallServices
 
-# if shared lib folder exists, we npm link our services
-if [ ! -f lib ] && [ -f lib/package.json ]
+# if shared folder exists, we npm link our services
+if [ ! -f shared ] && [ -f shared/package.json ]
 then
 	npmLinkServices
 fi
