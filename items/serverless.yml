@@ -1,4 +1,4 @@
-frameworkVersion: "1.1.0"
+frameworkVersion: "1.x"
 
 service: ${file(../shared/config.yml):appPrefix}-items
 
@@ -18,7 +18,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${file(../shared/config.yml):awsRegion}:*:*"
+      Resource: "arn:awsdynamodb:${file(../shared/config.yml):awsRegion}:*:*"
 
 resources:
   Resources:

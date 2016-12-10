@@ -16,3 +16,4 @@ To make full application ```deploy``` and ```remove``` simple, I've boiled them 
 - Run ```npm run info``` to ```sls info``` every service contained, getting a rundown of your app as a whole
 - Run ```npm run deploy``` to ```sls deploy``` every service contained
 - Run ```npm run remove``` to ```sls remove``` every service contained
+- Run ```npm run offline``` to ```sls offline``` every service contained

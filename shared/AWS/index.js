@@ -16,46 +16,12 @@ from ~/.aws/credentials).
 
 module.exports = (Config) => {
 
-	var AWS = require('aws-sdk');
+	//if we're using serverless-offline
+	if (process.env.IS_OFFLINE) {
+		return require('./Offline.js')(Config);
+	}
 
-	//this really applies to local development, so we exit out if not offline
-	if (!process.env.IS_OFFLINE) { return AWS; }
-
-	var _ = require('underscore');
-
-	var fs = require('fs');
-
-	var path = require('path');
-
-	var exec = require('child_process').execSync;
-
-	var localCredFilepath = '~/.aws/credentials';
-
-	var profiles = {};
-
-	var contents = exec(`cat ${localCredFilepath}`, { encoding: 'utf8' });
-
-	_.each(contents.split(/\n\n/), function(group) {
-		var lines = group.split(/\n/);
-		var profileLine = lines.shift();
-		var profileKey = profileLine.replace(/[\[\]]+/g, '');
-		profiles[profileKey] = {};
-
-		_.each(lines, function(line) {
-			var parts = line.split(/\s?\=\s?/);
-			var key = parts[0];
-			var value = parts[1];
-			profiles[profileKey][key] = value;
-		});
-
-	});
-
-	AWS.config.update({
-		region: Config.awsRegion,
-		accessKeyId: profiles[Config.awsProfile].aws_access_key_id,
-		secretAccessKey: profiles[Config.awsProfile].aws_secret_access_key
-	});
-
-	return AWS;
+	//otherwise, we simply return our aws-sdk
+	return require('aws-sdk');
 
 };

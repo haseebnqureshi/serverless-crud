@@ -1,8 +1,10 @@
 
-appPrefix: hq-serverless-crud
+# consolidating core configurations between your services
 awsRuntime: nodejs4.3
-awsStage: dev
+awsStage: test
 awsRegion: us-east-1
 awsProfile: av_serverless_admin
 
-awsDynamodbTablePrefix: hq-serverless-crud-
+# and load any other variables you want :)
+appPrefix: hq-serverless-crud
+awsDynamoDbTablePrefix: hq-serverless-crud-

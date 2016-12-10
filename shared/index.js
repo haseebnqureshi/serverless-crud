@@ -12,11 +12,11 @@ To help with workflow and ease, this 'shared' library
 auto-loads its contents, so long as they are valid
 CommonJS modules that you find in NodeJS or NPM packages.
 
-We load our 'lib' helpers and direct inject them into
-any loaded package herein, so you have full access. We
-then NPM link (essentially rsync meets symlink) the
-entire 'shared' directory and make it available in each
-of your serverless functions.
+We load our 'shared' help3ers and direct inject them into 
+our models herein, so you have full access. We then NPM
+link (essentially rsync meets symlink) the entire 'shared'
+directory and make it available in each of your 
+serverless functions.
 
 So again, this might not be for everyone, but this sure
 as hell works for us.

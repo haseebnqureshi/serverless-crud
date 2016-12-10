@@ -2,7 +2,7 @@
 
 module.exports = (Config, AWS, Utils, ModelName) => {
 
-	var TableName = Config.awsDynamodbTablePrefix + ModelName;
+	var TableName = Config.awsDynamoDbTablePrefix + ModelName;
 
 	return {
 
